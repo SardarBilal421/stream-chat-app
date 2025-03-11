@@ -9,6 +9,12 @@ This repository contains two main branches:
 - `frontend`: Contains the React application with Stream Chat integration
 - `backend`: Contains the Node.js server for AI processing and authentication
 
+## Demo
+
+Check out the application demo:
+
+[![AI Chat Application Demo](https://cdn.loom.com/sessions/thumbnails/d8d350bf41164024a6ef0f3a6a40faf8-with-play.gif)](https://www.loom.com/share/d8d350bf41164024a6ef0f3a6a40faf8)
+
 ## Features
 
 - 🚀 Real-time chat functionality using Stream Chat
