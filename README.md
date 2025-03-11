@@ -1,54 +1,133 @@
-# React + TypeScript + Vite
+# AI Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern real-time chat application built with React and Stream Chat, featuring an AI coach that provides intelligent responses. The application demonstrates clean architecture, real-time messaging, and seamless AI integration.
 
-Currently, two official plugins are available:
+## Repository Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains two main branches:
 
-## Expanding the ESLint configuration
+- `frontend`: Contains the React application with Stream Chat integration
+- `backend`: Contains the Node.js server for AI processing and authentication
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 🚀 Real-time chat functionality using Stream Chat
+- 🤖 AI coaching with intelligent responses
+- 🎨 Modern UI with Tailwind CSS
+- ⚡ Loading states and typing indicators
+- 🛡️ Error handling and retry mechanisms
+- 📱 Responsive design
+
+## Tech Stack
+
+### Frontend
+
+- React with TypeScript
+- Stream Chat React SDK
+- Tailwind CSS
+- React Hot Toast
+- Vite
+
+### Backend
+
+- Node.js
+- Express
+- Stream Chat Server SDK
+- JWT for authentication
+
+## Getting Started
+
+### Frontend Setup
+
+1. Clone the repository and switch to frontend branch:
+
+```bash
+git clone <repository-url>
+git checkout frontend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Create a `.env` file in the root directory:
+
+```env
+VITE_API_ENDPOINT=http://localhost:5000
+```
+
+4. Start the development server:
+
+```bash
+npm run dev
+```
+
+### Backend Setup
+
+1. Switch to backend branch:
+
+```bash
+git checkout backend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory:
+
+```env
+STREAM_API_KEY=your_stream_api_key
+STREAM_API_SECRET=your_stream_api_secret
+PORT=5000
+```
+
+4. Start the server:
+
+```bash
+npm start
+```
+
+## Project Structure
+
+### Frontend Structure
+
+```
+src/
+├── components/
+│   ├── Chat/
+│   │   ├── ChatWindow.tsx
+│   │   └── states/
+│   └── UI/
+├── hooks/
+├── services/
+├── types/
+└── screens/
+```
+
+### Backend Structure
+
+```
+src/
+├── controllers/
+├── config/
+├── routes/
+└── services/
+```
+
+## Environment Variables
+
+### Frontend Variables
+
+- `VITE_STREAM_API_KEY`: Your Stream Chat API key
+- `VITE_API_ENDPOINT`: Backend API endpoint
+
+### Backend Variables
+
+- `STREAM_API_KEY`: Your Stream Chat API key
+- `STREAM_API_SECRET`: Your Stream Chat API secret
+- `PORT`: Server port (default: 5000)
