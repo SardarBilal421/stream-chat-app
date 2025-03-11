@@ -101,7 +101,7 @@ export const useChat = () => {
       mounted = false;
       disconnect();
     };
-  }, []);
+  }, [initializeChat, disconnect]);
 
   return {
     ...state,

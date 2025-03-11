@@ -9,7 +9,7 @@ export const ErrorState = ({ error }: ErrorStateProps) => {
   return (
     <>
       <Toaster />
-      <Error message={error} />
+      <Error error={error} reset={() => window.location.reload()} />
       <div className="flex items-center justify-center min-h-screen">
         <button 
           onClick={() => window.location.reload()} 

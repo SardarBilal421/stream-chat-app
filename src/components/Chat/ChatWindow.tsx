@@ -1,5 +1,7 @@
 import React from 'react';
 import {
+  Chat,
+  Channel,
   Window,
   ChannelHeader,
   MessageList,
@@ -17,20 +19,27 @@ interface ChatWindowProps {
 }
 
 export const ChatWindow: React.FC<ChatWindowProps> = ({ chat }) => {
+  const { chatClient, channel } = chat;
   const { handleMessageSubmit } = useMessageHandler(chat);
-  const isTyping = useAITyping(chat.channel);
+  const isTyping = useAITyping(channel);
+
+  if (!chatClient || !channel) return null;
 
   return (
-    <div className="chat-container" style={{ height: '100vh', width: '100vw' }}>
-      <Window>
-        <ChannelHeader />
-        <MessageList />
-        <TypingIndicator isVisible={isTyping} />
-        <MessageInput 
-          overrideSubmitHandler={handleMessageSubmit}
-        />
-      </Window>
-      <Thread />
+    <div className="chat-container h-screen w-screen">
+      <Chat client={chatClient}>
+        <Channel channel={channel}>
+          <Window>
+            <ChannelHeader />
+            <MessageList />
+            <TypingIndicator isVisible={isTyping} />
+            <MessageInput 
+              overrideSubmitHandler={handleMessageSubmit}
+            />
+          </Window>
+          <Thread />
+        </Channel>
+      </Chat>
     </div>
   );
 };

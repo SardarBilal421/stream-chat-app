@@ -1,9 +1,10 @@
+import React from 'react';
 import { useChat } from '../../hooks/useChat';
 import { LoadingState } from '../../components/Chat/states/LoadingState';
 import { ErrorState } from '../../components/Chat/states/ErrorState';
-import { ChatState } from '../../components/Chat/states/ChatState';
+import { ChatWindow } from '../../components/Chat/ChatWindow';
 
-function Chat() {
+const Chat: React.FC = () => {
   const chat = useChat();
 
   if (chat.isLoading) {
@@ -14,7 +15,11 @@ function Chat() {
     return <ErrorState error={chat.error} />;
   }
 
-  return <ChatState chat={chat} />;
-}
+  if (!chat.chatClient || !chat.channel) {
+    return <LoadingState />;
+  }
+
+  return <ChatWindow chat={chat} />;
+};
 
 export default Chat;

@@ -1,4 +1,4 @@
-import { StreamChat, Channel as StreamChannel } from 'stream-chat';
+import { StreamChat, Channel as StreamChannel, SendMessageAPIResponse, DefaultGenerics } from 'stream-chat';
 export * from './message';
 
 export interface ChatUser {
@@ -21,6 +21,6 @@ export interface ChatState {
 }
 
 export interface ChatContextType extends ChatState {
-  sendMessage: (text: string) => Promise<void>;
+  sendMessage: (text: string) => Promise<SendMessageAPIResponse<DefaultGenerics>>;
   disconnect: () => Promise<void>;
 } 
