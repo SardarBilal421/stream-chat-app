@@ -1,7 +1,7 @@
 import { ChatUser, LoginResponse } from '../types';
 
 // const API_URL = 'http://localhost:5000';
-const API_URL = 'https://stream-chat-app-mk66-rebg6emb4-sardarbilal421s-projects.vercel.app/';
+const API_URL = 'https://stream-chat-app-ypy3.vercel.app';
 
 
 export const authService = {
