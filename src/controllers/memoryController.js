@@ -1,16 +1,17 @@
-const smartMemory = {};
+const memoryStore = require("../utils/memoryStore");
 
 const getMemory = (req, res) => {
   const { user_id } = req.query;
-  res.json(smartMemory[user_id] || {});
+  res.json(memoryStore.get(user_id));
 };
 
 const updateMemory = (req, res) => {
   const { user_id, updates } = req.body;
-  const currentMemory = smartMemory[user_id] || {};
-  Object.assign(currentMemory, updates);
-  smartMemory[user_id] = currentMemory;
-  res.json({ status: "updated", memory: currentMemory });
+  const updatedMemory = memoryStore.update(user_id, updates);
+  res.json({ status: "updated", memory: updatedMemory });
 };
 
-module.exports = { getMemory, updateMemory };
+module.exports = {
+  getMemory,
+  updateMemory,
+};
