@@ -14,7 +14,7 @@ This repository contains two main branches:
 Check out the application demo:
 
 [![AI Chat Application Demo]
-https://www.loom.com/share/d8d350bf41164024a6ef0f3a6a40faf8
+https://www.loom.com/share/4f1ea97208b24564acae6bd6c8deaeb5
 
 ## Features
 
