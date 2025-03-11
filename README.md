@@ -84,6 +84,8 @@ npm install
 STREAM_API_KEY=your_stream_api_key
 STREAM_API_SECRET=your_stream_api_secret
 PORT=5000
+AI_COACH_USER_ID=your_ai_coach_user_id
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
 4. Start the server:
