@@ -17,6 +17,7 @@ export interface ChatState {
   channel: StreamChannel | null;
   isLoading: boolean;
   error: string | null;
+  isInitialized: boolean;
 }
 
 export interface ChatContextType extends ChatState {

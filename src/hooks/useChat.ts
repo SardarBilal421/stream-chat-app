@@ -8,6 +8,7 @@ const INITIAL_STATE: ChatState = {
   channel: null,
   isLoading: true,
   error: null,
+  isInitialized: false,
 };
 
 export const useChat = () => {
@@ -16,7 +17,6 @@ export const useChat = () => {
   const initializeChat = useCallback(async () => {
     try {
       setState(prev => ({ ...prev, isLoading: true, error: null }));
-      // static userName and user_id
       const learner: ChatUser = { user_id: 'learner1', name: 'Learner 1' };
       const { token, api_key, user_id } = await authService.login(learner);
 
@@ -36,38 +36,45 @@ export const useChat = () => {
       });
       
       await channelInstance.watch();
-
+      
       setState({
         chatClient: client,
         channel: channelInstance,
         isLoading: false,
         error: null,
+        isInitialized: true,
       });
+
+      return { client, channel: channelInstance };
     } catch (err) {
       setState(prev => ({
         ...prev,
         error: err instanceof Error ? err.message : 'An error occurred',
         isLoading: false,
+        isInitialized: false,
       }));
       console.error('Chat initialization error:', err);
+      throw err;
     }
   }, []);
 
   const sendMessage = useCallback(async (text: string) => {
-    if (!state.channel || !state.chatClient) {
+    if (!state.channel || !state.chatClient || !state.isInitialized) {
       throw new Error('Chat not initialized');
     }
 
     try {
-      await state.channel.sendMessage({
+      const response = await state.channel.sendMessage({
         text,
         user_id: state.chatClient.userID,
       });
+
+      return response;
     } catch (error) {
       console.error("Error sending message:", error);
       throw error;
     }
-  }, [state.channel, state.chatClient]);
+  }, [state.channel, state.chatClient, state.isInitialized]);
 
   const disconnect = useCallback(async () => {
     if (state.chatClient) {
@@ -77,8 +84,21 @@ export const useChat = () => {
   }, [state.chatClient]);
 
   useEffect(() => {
-    initializeChat();
+    let mounted = true;
+
+    const init = async () => {
+      try {
+        await initializeChat();
+      } catch (err) {
+        if (!mounted) return;
+        console.error('Failed to initialize chat:', err);
+      }
+    };
+
+    init();
+
     return () => {
+      mounted = false;
       disconnect();
     };
   }, []);
